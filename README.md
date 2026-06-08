@@ -1,33 +1,83 @@
-# Fraud Detection Using Ensemble Learning and Deep Learning
 
-## Overview
-This project focuses on fraud detection using multiple machine learning and deep learning approaches. The dataset contains transaction information along with anomaly scores generated from XGBoost, LightGBM, and CatBoost models.
+---
 
-Several neural network architectures were trained and evaluated to classify fraudulent transactions.
+# Version 2 — Better README
 
-## Models Implemented
+```markdown
+# Hybrid Fraud Detection Framework Using Ensemble Anomaly Scores and Deep Learning
 
-1. Feed Forward Neural Network
-2. Autoencoder
-3. CNN
-4. LSTM
-5. Autoencoder + Isolation Forest
-6. Ensemble Neural Network
+## Introduction
 
-## Dataset
+Financial fraud detection remains one of the most challenging problems due to severe class imbalance and constantly evolving attack patterns.
 
-The dataset contains:
+This project proposes a hybrid fraud detection framework that combines:
 
-- Transaction features
-- Card information
-- Address information
-- Product information
-- Engineered anomaly scores:
-  - xgb_anomaly_score
-  - lgbm_anomaly_score
-  - catboost_anomaly_score
+- Gradient Boosting based anomaly scores
+- Deep Learning classifiers
+- Autoencoder-based anomaly detection
+- Neural Network ensembles
 
-Target Variable:
+The objective is to improve fraud detection performance by leveraging anomaly information generated from multiple boosting algorithms.
+
+---
+
+## Dataset Features
+
+The dataset consists of transaction-level information including:
+
+### Transaction Features
+
+- TransactionDT
+- TransactionAmt
+- ProductCD
+
+### Card Features
+
+- card1–card6
+
+### Address Features
+
+- addr1
+- addr2
+
+### Behavioral Features
+
+- M1–M9
+
+### Generated Meta Features
+
+The following anomaly scores are generated using previously trained models:
+
+- XGBoost Anomaly Score
+- LightGBM Anomaly Score
+- CatBoost Anomaly Score
+
+These scores serve as high-level indicators of suspicious behavior.
+
+---
+
+## Project Architecture
 
 ```text
-isFraud
+Transaction Data
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+Gradient Boosting Models
+(XGB + LGBM + CatBoost)
+        │
+        ▼
+Anomaly Scores
+        │
+        ▼
+Deep Learning Models
+        │
+ ┌──────┼──────┐
+ ▼      ▼      ▼
+NN     CNN    LSTM
+ │      │      │
+ └──────┼──────┘
+        ▼
+ Fraud Prediction
